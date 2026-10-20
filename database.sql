@@ -1,5 +1,5 @@
 
--- =====================================================
+-- -- =====================================================
 -- PROJETO: GERENCIAMENTO DE FUNCIONARIOS E PROJETOS
 -- Descricao: Banco de dados relacional desenvolvido
 -- para praticar SQL e o relacionamento entre tabelas.
@@ -87,7 +87,59 @@ WHERE id_gerente = 2;
 
 
 -- =====================================================
--- 4. ATUALIZACAO DE DADOS
+-- 4. JOIN E AGRUPAMENTO DE DADOS
+-- =====================================================
+
+-- JOIN: listar cada projeto com o nome do gerente responsavel
+-- O JOIN une as duas tabelas onde id_gerente = id_funcionarios
+SELECT
+    p.nome_projeto,
+    f.nome_funcionario AS gerente
+FROM tabelaprojetos p
+JOIN tabelafuncionarios f
+    ON p.id_gerente = f.id_funcionarios;
+
+-- GROUP BY + COUNT: quantidade de funcionarios por departamento
+SELECT
+    departamento,
+    COUNT(*) AS total_funcionarios
+FROM tabelafuncionarios
+GROUP BY departamento
+ORDER BY total_funcionarios DESC;
+
+-- GROUP BY + AVG: media salarial por departamento
+SELECT
+    departamento,
+    ROUND(AVG(salario), 2) AS media_salarial
+FROM tabelafuncionarios
+GROUP BY departamento
+ORDER BY media_salarial DESC;
+
+-- JOIN + GROUP BY: quantidade de projetos por gerente
+SELECT
+    f.nome_funcionario AS gerente,
+    COUNT(p.id_projeto) AS total_projetos
+FROM tabelafuncionarios f
+JOIN tabelaprojetos p
+    ON p.id_gerente = f.id_funcionarios
+GROUP BY f.id_funcionarios, f.nome_funcionario
+ORDER BY total_projetos DESC;
+
+-- LEFT JOIN: todos os funcionarios, inclusive os que nao gerenciam projeto
+-- Com JOIN normal, quem nao tem projeto some do resultado.
+-- Com LEFT JOIN, o funcionario aparece com total 0.
+SELECT
+    f.nome_funcionario,
+    COUNT(p.id_projeto) AS projetos_gerenciados
+FROM tabelafuncionarios f
+LEFT JOIN tabelaprojetos p
+    ON p.id_gerente = f.id_funcionarios
+GROUP BY f.id_funcionarios, f.nome_funcionario
+ORDER BY projetos_gerenciados DESC;
+
+
+-- =====================================================
+-- 5. ATUALIZACAO DE DADOS
 -- =====================================================
 
 -- Atualizar o salario dos funcionarios do departamento de TI
@@ -99,5 +151,6 @@ WHERE departamento = 'TI';
 SELECT nome_funcionario, departamento, salario
 FROM tabelafuncionarios
 WHERE departamento = 'TI';
+
 
 
