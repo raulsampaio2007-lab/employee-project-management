@@ -5,7 +5,7 @@ Projeto de banco de dados relacional desenvolvido para praticar SQL, organizaç�
 
 ## Sobre o projeto
 
-O projeto simula parte da estrutura de dados de uma empresa, permitindo cadastrar funcionários, consultar informações profissionais e relacionar gerentes a projetos.
+O projeto simula parte da estrutura de dados de uma empresa, permitindo cadastrar funcionários, consultar informações profissionais, relacionar gerentes a projetos e analisar os dados por departamento.
 
 O desenvolvimento faz parte dos meus estudos em programação e banco de dados, com foco na aplicação prática dos fundamentos de SQL.
 
@@ -15,8 +15,8 @@ O desenvolvimento faz parte dos meus estudos em programação e banco de dados, 
 - Consultar informações utilizando filtros e condições.
 - Identificar departamentos cadastrados.
 - Atualizar informações de funcionários.
-- Relacionar projetos aos seus respectivos gerentes.
-- Praticar operações de exclusão de registros e tabelas.
+- Relacionar projetos aos seus respectivos gerentes usando `JOIN`.
+- Agrupar e resumir dados por departamento e por gerente.
 
 ## Tecnologias e conceitos
 
@@ -24,7 +24,9 @@ O desenvolvimento faz parte dos meus estudos em programação e banco de dados, 
 - **CREATE TABLE** — criação da estrutura das tabelas.
 - **INSERT INTO** — inserção de registros.
 - **SELECT, WHERE e DISTINCT** — consultas e filtragem de dados.
-- **UPDATE e DELETE** — atualização e exclusão de registros.
+- **JOIN e LEFT JOIN** — combinação de dados de duas tabelas.
+- **GROUP BY, COUNT e AVG** — agrupamento e cálculos por categoria.
+- **UPDATE** — atualização de registros.
 - **PRIMARY KEY e FOREIGN KEY** — identificação de registros e relacionamento entre tabelas.
 
 ## Estrutura do banco de dados
@@ -61,26 +63,45 @@ O script SQL contempla:
 - Filtragem por faixa salarial.
 - Listagem de departamentos sem duplicidade.
 - Consulta de projetos por identificador de gerente.
+- Listagem de cada projeto com o nome do gerente responsável (`JOIN`).
+- Quantidade de funcionários por departamento (`GROUP BY` e `COUNT`).
+- Média salarial por departamento (`GROUP BY` e `AVG`).
+- Quantidade de projetos por gerente (`JOIN` e `GROUP BY`).
+- Listagem de todos os funcionários, inclusive os que não gerenciam projetos (`LEFT JOIN`).
 - Atualização dos salários dos funcionários de TI.
-- Exemplos de exclusão de registros e remoção de tabelas.
 
-As operações de exclusão e remoção estão comentadas no script para evitar que sejam executadas acidentalmente durante a demonstração principal.
+### Exemplos de resultados
+
+Quantidade de funcionários por departamento:
+
+| departamento | total_funcionarios |
+|---|---|
+| TI | 4 |
+| Vendas | 3 |
+| Financeiro | 2 |
+| Marketing | 1 |
+
+Projetos com seus gerentes:
+
+| nome_projeto | gerente |
+|---|---|
+| Projeto A | Daniel Campos |
+| Projeto B | Luiza Dias |
+| Projeto C | Davi Lucas Moraes |
 
 ## Como executar
 
-1. Utilize um sistema de banco de dados compatível com o script SQL.
+1. Utilize um sistema de banco de dados compatível com o script SQL (testado em SQLite).
 2. Abra o arquivo `database.sql` em seu ambiente de desenvolvimento.
 3. Execute o script em um banco de dados de teste.
 4. Confira os resultados das consultas e da atualização salarial.
 
-As instruções de exclusão são opcionais e devem ser executadas separadamente, observando o relacionamento entre funcionários e projetos.
-
 ## Aprendizados
 
-Este projeto representa uma etapa da minha jornada de aprendizado em tecnologia, na qual venho desenvolvendo a capacidade de estruturar bancos de dados, consultar informações e compreender os relacionamentos entre tabelas.
+Este projeto representa uma etapa da minha jornada de aprendizado em tecnologia, na qual venho desenvolvendo a capacidade de estruturar bancos de dados, consultar informações, combinar tabelas com `JOIN` e resumir dados com `GROUP BY`.
 
 ## Autor
 
-Desenvolvido como projeto prático de estudos em SQL.
+Desenvolvido por Raul Sampaio Mochnacs Arruda como projeto prático de estudos em SQL.
 
-
+[LinkedIn](https://www.linkedin.com/in/raul-sampaio-mochnacs-arruda-7a48323a6)
